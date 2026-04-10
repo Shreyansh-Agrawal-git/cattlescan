@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.env
+venv/
+.venv/
+
+# Model (too large for git — add manually)
+backend/*.pth
+backend/*.pt
+
+# Node
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# VS Code
+.vscode/
+"backend/*.pth" 
+"backend/venv/" 
+"frontend/node_modules/" 
