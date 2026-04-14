@@ -4,13 +4,14 @@ ResNet-50 powered web app for detecting Lumpy Skin Disease (LSD) and
 Foot-and-Mouth Disease (FMD) in cattle images.
 
 ## Classes
-| Label | Meaning |
-|---|---|
-| Normal | Healthy cattle, no disease detected |
-| LSD_Mild | Lumpy Skin Disease — early stage |
-| LSD_Severe | Lumpy Skin Disease — advanced |
-| FMD_Mild | Foot-and-Mouth Disease — early stage |
-| FMD_Severe | Foot-and-Mouth Disease — severe |
+
+| Label      | Meaning                              |
+| ---------- | ------------------------------------ |
+| Normal     | Healthy cattle, no disease detected  |
+| LSD_Mild   | Lumpy Skin Disease — early stage     |
+| LSD_Severe | Lumpy Skin Disease — advanced        |
+| FMD_Mild   | Foot-and-Mouth Disease — early stage |
+| FMD_Severe | Foot-and-Mouth Disease — severe      |
 
 ---
 
@@ -40,13 +41,16 @@ cattlescan/
 ## Setup in VS Code
 
 ### Step 1 — Place your model file
+
 Copy your trained model file into the backend folder:
+
 ```
 cattlescan/backend/best_model.pth
 ```
 
 ### Step 2 — Open two terminals in VS Code
-Press  Ctrl + `  to open the integrated terminal, then click the + icon to open a second one.
+
+Press Ctrl + ` to open the integrated terminal, then click the + icon to open a second one.
 
 ---
 
@@ -63,6 +67,7 @@ uvicorn main:main --reload --port 8000
 ```
 
 You should see:
+
 ```
 INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
 [OK] Model loaded from 'best_model.pth' on cpu
@@ -83,6 +88,7 @@ npm run dev
 ```
 
 You should see:
+
 ```
   VITE v5.x.x  ready in xxx ms
   ➜  Local:   http://localhost:5173/
@@ -91,11 +97,13 @@ You should see:
 ---
 
 ### Step 3 — Open the app
-Visit:  http://localhost:5173
+
+Visit: http://localhost:5173
 
 ---
 
 ## How the proxy works
+
 Vite is configured to forward any request starting with `/api/` to the FastAPI
 server on port 8000. So `fetch('/api/predict')` in React goes to
 `http://localhost:8000/predict` — no CORS issues, no hardcoded ports in React.
@@ -104,14 +112,15 @@ server on port 8000. So `fetch('/api/predict')` in React goes to
 
 ## API Endpoints
 
-| Method | URL | Description |
-|---|---|---|
-| GET | http://localhost:8000/ | API status |
-| GET | http://localhost:8000/health | Health check + model status |
-| POST | http://localhost:8000/predict | Upload image → get prediction |
-| GET | http://localhost:8000/docs | Swagger UI (auto-generated) |
+| Method | URL                           | Description                   |
+| ------ | ----------------------------- | ----------------------------- |
+| GET    | http://localhost:8000/        | API status                    |
+| GET    | http://localhost:8000/health  | Health check + model status   |
+| POST   | http://localhost:8000/predict | Upload image → get prediction |
+| GET    | http://localhost:8000/docs    | Swagger UI (auto-generated)   |
 
 ### POST /predict — example response
+
 ```json
 {
   "prediction": "LSD_Severe",
@@ -147,12 +156,14 @@ server on port 8000. So `fetch('/api/predict')` in React goes to
 
 **"Demo mode" in the header**
 → The backend is running but `best_model.pth` was not found in the backend folder.
-   Copy your `.pth` file to `cattlescan/backend/best_model.pth`.
+Copy your `.pth` file to `cattlescan/backend/best_model.pth`.
 
 **Model loading error**
 → The script handles both plain state_dict and checkpoint dict formats automatically.
-   If you see an error, check that the .pth file is not corrupted.
+If you see an error, check that the .pth file is not corrupted.
 
 **Port already in use**
 → Change the port: `uvicorn main:main --reload --port 8001`
-   Then update `vite.config.js` target from 8000 to 8001.
+Then update `vite.config.js` target from 8000 to 8001.
+
+# cattlescan
